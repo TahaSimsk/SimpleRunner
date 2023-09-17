@@ -55,26 +55,4 @@ public class TouchInputs : MonoBehaviour
     }
 
 
-
-
-    //UI ELEMENTS
-
-
-    //public void MoveByMouse()
-    //{
-    //    moveByMouse = true;
-    //}
-    //public void DisableMouse()
-    //{
-    //    moveByMouse = false;
-    //}
-
-    //public void MoveByTouch() 
-    //{ 
-    //    moveByTouch = true;
-    //}
-    //public void DisableTouch()
-    //{
-    //    moveByTouch = false;
-    //}
 }

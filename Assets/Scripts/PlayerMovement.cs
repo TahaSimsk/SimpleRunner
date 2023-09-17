@@ -8,10 +8,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] TouchInputs touchInputs;
 
     float horizontalValue;
+    Rigidbody rb;
 
     void Awake()
     {
-
+        rb = GetComponent<Rigidbody>();
     }
 
 
@@ -35,11 +36,11 @@ public class PlayerMovement : MonoBehaviour
 
     void HorizontalSpeed()
     {
-        if (touchInputs.moveByMouse)
-        {
-            float newPositionX = transform.position.x + touchInputs.horizontalValue / 7f;
-            transform.position = new Vector3(newPositionX, transform.position.y, transform.position.z);
-        }
+
+
+        //float newPositionX = transform.position.x + touchInputs.horizontalValue / 7f;
+        //transform.position = new Vector3(newPositionX, transform.position.y, transform.position.z);
+
 
 
 
@@ -48,9 +49,10 @@ public class PlayerMovement : MonoBehaviour
             if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
             {
                 horizontalValue = Input.GetTouch(0).deltaPosition.x;
-                float newPositionX = transform.position.x + horizontalValue / 100f;
+                float newPositionX = transform.position.x + touchInputs.horizontalValue / 100f;
                 newPositionX = Mathf.Clamp(newPositionX, -4, 4);
                 transform.position = new Vector3(newPositionX, transform.position.y, transform.position.z);
+
             }
         }
 
