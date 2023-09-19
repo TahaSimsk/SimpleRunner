@@ -37,11 +37,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void ResetGame()
-    {
-        SceneManager.LoadScene(0);
-    }
-
     void MoveHorizontal()
     {
 

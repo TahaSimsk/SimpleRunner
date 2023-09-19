@@ -26,6 +26,7 @@ public class PlusBulletObsticle : MonoBehaviour
         if (playerShooting != null)
         {
             playerShooting.GetBulletCount(bulletCount);
+            Destroy(gameObject);
         }
 
     }

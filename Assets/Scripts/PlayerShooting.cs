@@ -10,6 +10,8 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] Transform secondBulletSpawnPoint;
     [SerializeField] Transform thirdBulletSpawnPoint;
     [SerializeField] Transform fourthBulletSpawnPoint;
+    [SerializeField] Transform fifthBulletSpawnPoint;
+    [SerializeField] Transform sixthBulletSpawnPoint;
     [SerializeField] float fireRate;
     [SerializeField] float bulletForwardSpeed;
     [SerializeField] float bulletRange;
@@ -54,7 +56,7 @@ public class PlayerShooting : MonoBehaviour
     }
 
 
-
+    #region FireBulletsIntances
     void FireBullets()
     {
         GameObject firstbulletInstance = Instantiate(bullet, firstBulletSpawnPoint.position, Quaternion.identity);
@@ -79,9 +81,22 @@ public class PlayerShooting : MonoBehaviour
             fourthBulletInstance.gameObject.GetComponent<Rigidbody>().velocity = Vector3.forward * bulletForwardSpeed;
             Destroy(fourthBulletInstance.gameObject, bulletRange);
         }
+        if (bulletCount >= 5)
+        {
+            GameObject fifthBulletInstance = Instantiate(bullet, fifthBulletSpawnPoint.position, Quaternion.identity);
+            fifthBulletInstance.gameObject.GetComponent<Rigidbody>().velocity = Vector3.forward * bulletForwardSpeed;
+            Destroy(fifthBulletInstance.gameObject, bulletRange);
+        }
+        if (bulletCount >= 6)
+        {
+            GameObject sixthBulletInstance = Instantiate(bullet, sixthBulletSpawnPoint.position, Quaternion.identity);
+            sixthBulletInstance.gameObject.GetComponent<Rigidbody>().velocity = Vector3.forward * bulletForwardSpeed;
+            Destroy(sixthBulletInstance.gameObject, bulletRange);
+        }
+
 
 
     }
-
+    #endregion
 
 }

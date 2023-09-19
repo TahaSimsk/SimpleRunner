@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530717ea47b78a44ba11336b75c55192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletsHitDivider: 2
+  bulletsHitDivider: 4
 --- !u!1 &7930586260566721217
 GameObject:
   m_ObjectHideFlags: 0

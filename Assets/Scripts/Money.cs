@@ -11,22 +11,19 @@ public class Money : MonoBehaviour
     [SerializeField] TextMeshProUGUI moneyText;
 
 
-    public const string MoneyAmountKey = "MoneyAmountKey";
-
     void Start()
     {
-        moneyAmount = PlayerPrefs.GetFloat(MoneyAmountKey, 100);
-        moneyText.text ="$" + moneyAmount.ToString();
+        moneyAmount = LevelManager.Instance.totalMoney;
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Money"))
         {
-
             moneyAmount += moneyMultiplier * (SceneManager.GetActiveScene().buildIndex + 1);
-            PlayerPrefs.SetFloat(MoneyAmountKey, moneyAmount);
-            moneyText.text ="$" + moneyAmount.ToString();
+            LevelManager.Instance.GetMoney(moneyAmount);
+
             Destroy(other.gameObject);
         }
 
