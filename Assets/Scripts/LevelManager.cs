@@ -59,12 +59,12 @@ public class LevelManager : MonoBehaviour
 
     public void NextLevelButton()
     {
-
-        SceneManager.LoadScene(1);
+        SaveLevel();
+        SceneManager.LoadScene(gameData.levelBuildIndex);
         Time.timeScale = 1;
         inGameUI.SetActive(true);
         endOfLevelUI.SetActive(false);
-        SaveLevel();
+
 
         //save the total money when the player touches finishline //or when the character dies/collides with end mannequins
         gameData.totalMoney = totalMoney;
