@@ -17,7 +17,6 @@ public class FireRateObsticle : MonoBehaviour
             if (increaseFireRate)
             {
                 fireRate += fireRateMultiplier;
-                Debug.Log(fireRate);
             }
             if (decreaseFireRate)
             {

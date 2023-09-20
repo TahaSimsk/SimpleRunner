@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         //float newPositionX = transform.position.x + touchInputs.horizontalValue / 7f;
         //transform.position = new Vector3(newPositionX, transform.position.y, transform.position.z);
 
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && !LevelManager.Instance.isDead)
         {
             horizontalValue = Input.GetTouch(0).deltaPosition.x / Screen.width * horizontalMoveSpeed;
             float newPositionX = transform.position.x + horizontalValue;

@@ -6,14 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class Money : MonoBehaviour
 {
-    [SerializeField] float moneyMultiplier;
-    [SerializeField] float moneyAmount;
+    [SerializeField] float baseMoneyMultiplier;
     [SerializeField] TextMeshProUGUI moneyText;
 
 
     void Start()
     {
-        moneyAmount = LevelManager.Instance.totalMoney;
+        MoneyManager.Instance.UpdateInGameMoneyText();
 
     }
 
@@ -21,8 +20,9 @@ public class Money : MonoBehaviour
     {
         if (other.CompareTag("Money"))
         {
-            moneyAmount += moneyMultiplier * (SceneManager.GetActiveScene().buildIndex + 1);
-            LevelManager.Instance.GetMoney(moneyAmount);
+            MoneyManager.Instance.totalMoney += (baseMoneyMultiplier + SceneManager.GetActiveScene().buildIndex * 2) * Powers.Instance.moneyIncomeMultiplier;
+
+            MoneyManager.Instance.UpdateInGameMoneyText();
 
             Destroy(other.gameObject);
         }

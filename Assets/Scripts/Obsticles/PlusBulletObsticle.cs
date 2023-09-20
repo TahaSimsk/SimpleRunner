@@ -18,7 +18,6 @@ public class PlusBulletObsticle : MonoBehaviour
             {
                 bulletCount++;
                 bulletsHit = 0;
-                Debug.Log(bulletCount);
             }
         }
 

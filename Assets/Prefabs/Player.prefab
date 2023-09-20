@@ -108,11 +108,10 @@ GameObject:
   - component: {fileID: 5571438005448268918}
   - component: {fileID: 7693333925509951712}
   - component: {fileID: 8656065604893925328}
-  - component: {fileID: 545251780000121848}
   - component: {fileID: 1764395391782878146}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -278,18 +277,6 @@ MonoBehaviour:
   bulletForwardSpeed: 30
   bulletRange: 1
   bulletCount: 1
---- !u!114 &545251780000121848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5382353320133424466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c043f1e4efa0de4428ef9d629d44a3cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1764395391782878146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,8 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3151972cf4d358547be18cdddc5cc17b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyMultiplier: 10
-  moneyAmount: 100
+  baseMoneyMultiplier: 10
   moneyText: {fileID: 0}
 --- !u!1 &7926562358117052375
 GameObject:

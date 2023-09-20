@@ -18,7 +18,6 @@ public class BulletRangeObsticle : MonoBehaviour
             if (increaseRange)
             {
                 bulletRange += rangeMultiplier;
-                Debug.Log(bulletRange);
             }
             if (decreaseRange)
             {
