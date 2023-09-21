@@ -46,14 +46,17 @@ public class SaveManager : MonoBehaviour
         gameData.fireRateUpgradeCost = Shop.Instance.fireRateUpgradeCost;
         gameData.fireRateUpgradeCostMultiplier = Shop.Instance.fireRateUpgradeCostMultiplier;
         gameData.fireRateUpgradeAmount = Shop.Instance.fireRateUpgradeAmount;
+        gameData.fireRatelvl = Shop.Instance.fireRateLvl;
 
         gameData.bulletRangeUpgradeCost = Shop.Instance.bulletRangeUpgradeCost;
         gameData.bulletRangeUpgradeCostMultiplier = Shop.Instance.bulletRangeUpgradeCostMultiplier;
         gameData.bulletRangeUpgradeAmount = Shop.Instance.bulletRangeUpgradeAmount;
+        gameData.rangeLvl = Shop.Instance.rangeLvl;
 
         gameData.moneyIncomeUpgradeCost = Shop.Instance.moneyIncomeUpgradeCost;
         gameData.moneyIncomeUpgradeCostMultiplier = Shop.Instance.moneyIncomeUpgradeCostMultiplier;
         gameData.moneyIncomeUpgradeAmount = Shop.Instance.moneyIncomeUpgradeAmount;
+        gameData.incomeLvl = Shop.Instance.incomeLvl;
     }
 
     void SavePowers()

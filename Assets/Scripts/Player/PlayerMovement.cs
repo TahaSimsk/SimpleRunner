@@ -11,6 +11,9 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float roadLenght;
 
+    public bool isClone;
+    public float cloneAmount;
+
     bool shouldBounce = false;
     float horizontalValue;
     Rigidbody rb;
@@ -23,6 +26,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (isClone)
+        {
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -roadLenght, roadLenght), transform.position.y, transform.position.z);
+            return;
+        }
         MoveForward();
         MoveHorizontal();
 
@@ -47,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         {
             horizontalValue = Input.GetTouch(0).deltaPosition.x / Screen.width * horizontalMoveSpeed;
             float newPositionX = transform.position.x + horizontalValue;
-            newPositionX = Mathf.Clamp(newPositionX, -roadLenght, roadLenght);
+            newPositionX = Mathf.Clamp(newPositionX, -roadLenght + cloneAmount, roadLenght - cloneAmount);
             transform.position = new Vector3(newPositionX, transform.position.y, transform.position.z);
             //rb.AddForce(new Vector3(horizontalValue, 0, 0), ForceMode.Impulse);
         }

@@ -10,9 +10,7 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] GameObject inGameUI;
     [SerializeField] GameObject endOfLevelUI;
-    [SerializeField] TextMeshProUGUI fRButtonLevelText;
-    [SerializeField] TextMeshProUGUI rangeButtonLevelText;
-    [SerializeField] TextMeshProUGUI incomeButtonLevelText;
+
 
     public static LevelManager Instance;
     public GameData gameData;
@@ -53,12 +51,10 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 0f;
         isDead = true;
         MoneyManager.Instance.UpdateEndLevelMoneyText();
-        Shop.Instance.UpdateFireRateUpgradeCostText();
-        Shop.Instance.UpdateRangeUpgradeCostText();
-        Shop.Instance.UpdateIncomeUpgradeCostText();
-        fRButtonLevelText.text = "Level " + (SceneManager.GetActiveScene().buildIndex + 1);
-        rangeButtonLevelText.text = "Level " + (SceneManager.GetActiveScene().buildIndex + 1);
-        incomeButtonLevelText.text = "Level " + (SceneManager.GetActiveScene().buildIndex + 1);
+        Shop.Instance.UpdateFireRateUpgradeCostAndLvlText();
+        Shop.Instance.UpdateRangeUpgradeCostAndLvlText();
+        Shop.Instance.UpdateIncomeUpgradeCostAndLvlText();
+        
     }
 
     public void NextLevelButton()

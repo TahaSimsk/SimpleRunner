@@ -34,11 +34,11 @@ public class MoneyManager : MonoBehaviour
 
     public void UpdateInGameMoneyText()
     {
-        inGameMoneyText.text = "$" + totalMoney;
+        inGameMoneyText.text = "$" + Mathf.FloorToInt(totalMoney);
     }
 
     public void UpdateEndLevelMoneyText()
     {
-        endLevelMoneyText.text = "$" + totalMoney;
+        endLevelMoneyText.text = "$" + Mathf.FloorToInt(totalMoney);
     }
 }
