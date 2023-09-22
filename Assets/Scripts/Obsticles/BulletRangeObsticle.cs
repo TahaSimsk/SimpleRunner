@@ -8,7 +8,16 @@ public class BulletRangeObsticle : MonoBehaviour
     [SerializeField] bool decreaseRange;
     [SerializeField] float rangeMultiplier;
     [SerializeField] float bulletRange;
-    
+
+    [SerializeField] GameObject visuals;
+
+    MeshRenderer meshRenderer;
+
+    private void Awake()
+    {
+        meshRenderer = GetComponent<MeshRenderer>();
+    }
+
 
 
     private void OnTriggerEnter(Collider other)
@@ -30,7 +39,8 @@ public class BulletRangeObsticle : MonoBehaviour
         if (playerShooting != null)
         {
             playerShooting.GetRange(bulletRange);
-            Destroy(gameObject);
+            meshRenderer.enabled=false;
+            visuals.gameObject.SetActive(false);
         }
 
     }

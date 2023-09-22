@@ -74,6 +74,12 @@ MonoBehaviour:
   - {fileID: 4267724238769195955}
   - {fileID: 1676455196670612890}
   - {fileID: 6241764356497226044}
+  walletSpawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   walletSpawnPoint: {fileID: 0}
   go: {fileID: 0}
 --- !u!1 &4729848997607391801

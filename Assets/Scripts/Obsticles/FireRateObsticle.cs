@@ -8,7 +8,14 @@ public class FireRateObsticle : MonoBehaviour
     [SerializeField] bool decreaseFireRate;
     [SerializeField] float fireRateMultiplier;
     [SerializeField] float fireRate;
-     
+    [SerializeField] GameObject visuals;
+    
+    MeshRenderer meshRenderer;
+
+    private void Awake()
+    {
+        meshRenderer = GetComponent<MeshRenderer>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -28,7 +35,8 @@ public class FireRateObsticle : MonoBehaviour
         if (playerShooting != null)
         {
             playerShooting.GetFireRate(fireRate);
-            Destroy(gameObject);
+            meshRenderer.enabled = false;
+            visuals.gameObject.SetActive(false);
         }
 
     }
