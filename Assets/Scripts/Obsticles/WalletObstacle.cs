@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Girls : MonoBehaviour
+public class WalletObstacle : MonoBehaviour
 {
     [SerializeField] float maxHealth;
-    [SerializeField] GameObject moneyPrefab;
-    [SerializeField] Animator animator;
     [SerializeField] TMP_Text healthText;
+    [SerializeField] GameObject wallet;
+    [SerializeField] Transform walletSpawnPoint;
+    [SerializeField] Animator animator;
 
-    bool hasDropped = false;
+    bool hasDied;
 
-
-    void Start()
+    private void Start()
     {
         healthText.text = maxHealth.ToString();
     }
@@ -22,24 +22,15 @@ public class Girls : MonoBehaviour
     {
         if (other.CompareTag("Bullet"))
         {
-
             animator.SetTrigger("BulletHit");
-
             maxHealth--;
             healthText.text = maxHealth.ToString();
-            if (maxHealth <= 0 && !hasDropped)
+            if (maxHealth <= 0 && !hasDied)
             {
-                hasDropped = true;
+                hasDied = true;
+                Instantiate(wallet, walletSpawnPoint.position, Quaternion.identity);
                 Destroy(gameObject);
-                Vector3 pos = transform.position;
-                pos.y = 0.2f;
-                Instantiate(moneyPrefab, pos, Quaternion.identity);
             }
-        }
-
-        if (other.CompareTag("Player"))
-        {
-            LevelManager.Instance.TriggerEndOfLevel();
         }
     }
 }

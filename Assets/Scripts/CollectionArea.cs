@@ -27,28 +27,34 @@ public class CollectionArea : MonoBehaviour
     {
         if (other.CompareTag("Wallet"))
         {
-            wallets.Add(other.gameObject);
-            gameObjects.Add(other.gameObject);
 
-            other.gameObject.SetActive(false);
-            other.gameObject.tag = "Untagged";
-            Debug.Log(wallets.Count);
-            for (int i = 0; i < transforms.Count; i++)
+            InstantiateWalletInCollectionArea(other);
+        }
+
+    }
+
+
+    void InstantiateWalletInCollectionArea(Collider other)
+    {
+        wallets.Add(other.gameObject);
+        gameObjects.Add(other.gameObject);
+
+        other.gameObject.SetActive(false);
+        other.gameObject.tag = "Untagged";
+
+        for (int i = 0; i < transforms.Count; i++)
+        {
+            if (gameObjects.Contains(other.gameObject))
             {
-                if (gameObjects.Contains(other.gameObject))
-                {
-                    GameObject instance = Instantiate(gameObjects[i], transforms[i].position, Quaternion.identity);
+                GameObject instance = Instantiate(gameObjects[i], transforms[i].position, Quaternion.identity);
 
-                    instance.SetActive(true);
-                    transforms.RemoveAt(i);
-                    gameObjects.RemoveAt(i);
-
-                }
+                instance.SetActive(true);
+                transforms.RemoveAt(i);
+                gameObjects.RemoveAt(i);
 
             }
 
         }
-
     }
 
 
@@ -57,57 +63,37 @@ public class CollectionArea : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
 
-            for (int i = 0; i < wallets.Count; i++)
-            {
-                Debug.Log(wallets.Count);
+            InstantiatePlayer(other);
 
-                float xPos;
+        }
+    }
 
-                if (i % 2 == 0)
-                {
-                    if (i == 0)
-                    {
-                        xPos = other.transform.position.x + i + 1;
-                    }
-                    else
-                    {
-                        xPos = other.transform.position.x + i;
-                    }
+    void InstantiatePlayer(Collider other)
+    {
+        for (int i = 0; i < wallets.Count; i++)
+        {
 
-                }
-                else
-                {
-                    xPos = other.transform.position.x - i;
-                }
+            GameObject instance = Instantiate(other.gameObject, new Vector3(walletSpawnPoints[i].position.x, other.gameObject.transform.position.y, walletSpawnPoints[i].position.z), Quaternion.identity);
 
-                GameObject instance = Instantiate(other.gameObject, new Vector3(walletSpawnPoints[i].position.x, other.gameObject.transform.position.y, walletSpawnPoints[i].position.z), Quaternion.identity);
+            instances.Add(instance);
 
-                instances.Add(instance);
+            instances[i].SetActive(true);
 
-                instances[i].SetActive(true);
+            instances[i].GetComponent<PlayerShooting>().enabled = true;
+            instances[i].GetComponent<Money>().enabled = false;
+            instances[i].GetComponent<PlayerMovement>().enabled = false;
+            instances[i].GetComponent<BoxCollider>().size = new Vector3(0.5f, 1, 0.7f);
+            instances[i].GetComponent<BoxCollider>().center = Vector3.zero;
 
-                instances[i].GetComponent<PlayerShooting>().enabled = true;
-                instances[i].GetComponent<Money>().enabled = false;
-                instances[i].GetComponent<PlayerMovement>().enabled = false;
-                instances[i].GetComponent<BoxCollider>().size = new Vector3(0.5f, 1, 0.7f);
-                instances[i].GetComponent<BoxCollider>().center = Vector3.zero;
+            Destroy(instances[i].GetComponent<Rigidbody>());
 
-                //other.gameObject.GetComponent<PlayerMovement>().cloneAmount = i - 0.5f;
-                //other.gameObject.GetComponent<BoxCollider>().size += new Vector3(i, 0, 0);
-                //instances[i].GetComponent<Collider>().enabled = false;
-                Destroy(instances[i].GetComponent<Rigidbody>());
+            instances[i].tag = "Instance";
 
+        }
 
-
-                instances[i].tag = "Instance";
-
-            }
-
-            for (int i = 0; i < wallets.Count; i++)
-            {
-                instances[i].transform.parent = other.transform;
-            }
-
+        for (int i = 0; i < wallets.Count; i++)
+        {
+            instances[i].transform.parent = other.transform;
         }
     }
 }

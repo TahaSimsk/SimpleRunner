@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BulletRangeObsticle : MonoBehaviour
@@ -11,11 +12,25 @@ public class BulletRangeObsticle : MonoBehaviour
 
     [SerializeField] GameObject visuals;
 
-    MeshRenderer meshRenderer;
+    [SerializeField] TMP_Text baseRangeText;
+    [SerializeField] TMP_Text rangeMultiplierText;
 
-    private void Awake()
+    [SerializeField] Animator animator;
+
+
+    private void Start()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
+
+        baseRangeText.text = bulletRange.ToString();
+
+        if (increaseRange)
+        {
+            rangeMultiplierText.text = "+" + rangeMultiplier.ToString();
+        }
+        if (decreaseRange)
+        {
+            rangeMultiplierText.text = "-" + rangeMultiplier.ToString();
+        }
     }
 
 
@@ -24,6 +39,7 @@ public class BulletRangeObsticle : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
+            animator.SetTrigger("BulletHit");
             if (increaseRange)
             {
                 bulletRange += rangeMultiplier;
@@ -32,6 +48,8 @@ public class BulletRangeObsticle : MonoBehaviour
             {
                 bulletRange -= rangeMultiplier;
             }
+
+            baseRangeText.text = bulletRange.ToString();
         }
 
         PlayerShooting playerShooting= other.GetComponent<PlayerShooting>();
@@ -39,8 +57,8 @@ public class BulletRangeObsticle : MonoBehaviour
         if (playerShooting != null)
         {
             playerShooting.GetRange(bulletRange);
-            meshRenderer.enabled=false;
-            visuals.gameObject.SetActive(false);
+            
+            visuals.SetActive(false);
         }
 
     }

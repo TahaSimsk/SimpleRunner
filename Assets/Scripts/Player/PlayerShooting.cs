@@ -6,12 +6,10 @@ using UnityEngine;
 public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] GameObject bullet;
-    [SerializeField] Transform firstBulletSpawnPoint;
-    [SerializeField] Transform secondBulletSpawnPoint;
-    [SerializeField] Transform thirdBulletSpawnPoint;
-    [SerializeField] Transform fourthBulletSpawnPoint;
-    [SerializeField] Transform fifthBulletSpawnPoint;
-    [SerializeField] Transform sixthBulletSpawnPoint;
+    [SerializeField] Transform bulletSpawnPoint;
+
+    [SerializeField] Animator animator;
+
     [SerializeField] float fireRate;
     [SerializeField] float bulletForwardSpeed;
     [SerializeField] float bulletRange;
@@ -19,14 +17,14 @@ public class PlayerShooting : MonoBehaviour
 
     [SerializeField] float bulletCount;
 
-
+    float bulletRotation;
 
     private void Start()
     {
         fireRate = Powers.Instance.fireRate;
         bulletRange = Powers.Instance.bulletRange;
-        StartCoroutine(Shoot());
 
+        StartCoroutine(Shoot());
     }
 
 
@@ -36,11 +34,7 @@ public class PlayerShooting : MonoBehaviour
         {
             yield return new WaitForSeconds(fireRate);
             FireBullets();
-            Debug.Log(fireRate);
-            Debug.Log(bulletRange);
-
         }
-
     }
 
 
@@ -49,11 +43,15 @@ public class PlayerShooting : MonoBehaviour
     {
 
         fireRate -= passFireRate / 1000;
+
+        fireRate = Mathf.Clamp(fireRate, 0.1f, 2);
     }
 
     public void GetRange(float passRange)
     {
         bulletRange += passRange / 100;
+
+        bulletRange = Mathf.Clamp(bulletRange, 0.2f, 2);
     }
 
     public void GetBulletCount(float passBulletCount)
@@ -62,47 +60,34 @@ public class PlayerShooting : MonoBehaviour
     }
 
 
-    #region FireBulletsIntances
+
     void FireBullets()
     {
-        GameObject firstbulletInstance = Instantiate(bullet, firstBulletSpawnPoint.position, Quaternion.Euler(0, 0, 0));
-        firstbulletInstance.gameObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * bulletForwardSpeed);
-        Destroy(firstbulletInstance.gameObject, bulletRange);
+        bulletRotation = 0;
+        for (int i = 0; i < bulletCount; i++)
+        {
 
-        if (bulletCount >= 2)
-        {
-            GameObject secondBulletInstance = Instantiate(bullet, firstBulletSpawnPoint.position, Quaternion.Euler(0, 2, 0));
-            secondBulletInstance.gameObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * bulletForwardSpeed);
-            Destroy(secondBulletInstance.gameObject, bulletRange);
-        }
-        if (bulletCount >= 3)
-        {
-            GameObject thirdBulletInstance = Instantiate(bullet, firstBulletSpawnPoint.position, Quaternion.Euler(0, -2, 0));
-            thirdBulletInstance.gameObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * bulletForwardSpeed);
-            Destroy(thirdBulletInstance.gameObject, bulletRange);
-        }
-        if (bulletCount >= 4)
-        {
-            GameObject fourthBulletInstance = Instantiate(bullet, firstBulletSpawnPoint.position, Quaternion.Euler(0, 4, 0));
-            fourthBulletInstance.gameObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * bulletForwardSpeed);
-            Destroy(fourthBulletInstance.gameObject, bulletRange);
-        }
-        if (bulletCount >= 5)
-        {
-            GameObject fifthBulletInstance = Instantiate(bullet, firstBulletSpawnPoint.position, Quaternion.Euler(0, -4, 0));
-            fifthBulletInstance.gameObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * bulletForwardSpeed);
-            Destroy(fifthBulletInstance.gameObject, bulletRange);
-        }
-        if (bulletCount >= 6)
-        {
-            GameObject sixthBulletInstance = Instantiate(bullet, firstBulletSpawnPoint.position, Quaternion.Euler(0,6,0));
-            sixthBulletInstance.gameObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * bulletForwardSpeed);
-            Destroy(sixthBulletInstance.gameObject, bulletRange);
-        }
+            if (i % 2 == 0)
+            {
 
+                bulletRotation = -bulletRotation;
+            }
+            else
+            {
+                bulletRotation = -bulletRotation + 1.5f;
+            }
+
+
+            GameObject bulletInstance = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.Euler(0, bulletRotation, 0));
+            
+            bulletInstance.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * bulletForwardSpeed);
+            bulletInstance.transform.rotation = Quaternion.Euler(0, 90, 0);
+            Destroy(bulletInstance, bulletRange);
+
+            animator.SetTrigger("Fire");
+        }
 
 
     }
-    #endregion
 
 }

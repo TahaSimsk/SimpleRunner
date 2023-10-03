@@ -9,7 +9,7 @@ public class Money : MonoBehaviour
     [SerializeField] float baseMoneyMultiplier;
     [SerializeField] TextMeshProUGUI moneyText;
 
-    bool isCollected;
+    bool hasCollected=false;
 
     void Start()
     {
@@ -21,7 +21,10 @@ public class Money : MonoBehaviour
     {
         if (other.CompareTag("Money"))
         {
-           
+            if (hasCollected)
+            {
+                return;
+            }
             MoneyManager.Instance.totalMoney += (baseMoneyMultiplier + SceneManager.GetActiveScene().buildIndex * 2) * Powers.Instance.moneyIncomeMultiplier;
 
             MoneyManager.Instance.UpdateInGameMoneyText();
