@@ -1,3 +1,4 @@
+using RDG;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -54,7 +55,8 @@ public class LevelManager : MonoBehaviour
         Shop.Instance.UpdateFireRateUpgradeCostAndLvlText();
         Shop.Instance.UpdateRangeUpgradeCostAndLvlText();
         Shop.Instance.UpdateIncomeUpgradeCostAndLvlText();
-        
+        Vibration.Vibrate(100, 50);
+
     }
 
     public void NextLevelButton()
@@ -66,7 +68,7 @@ public class LevelManager : MonoBehaviour
         isDead = false;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
+        Vibration.Vibrate(50, 50);
     }
 
 

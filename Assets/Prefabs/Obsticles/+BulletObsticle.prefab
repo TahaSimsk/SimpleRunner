@@ -349,6 +349,7 @@ GameObject:
   - component: {fileID: 1513563542028401081}
   - component: {fileID: 4494263515952842329}
   - component: {fileID: 3074574248074225324}
+  - component: {fileID: 3289387925475342229}
   m_Layer: 0
   m_Name: +BulletObsticle
   m_TagString: Untagged
@@ -433,6 +434,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3289387925475342229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6636542375719987884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89561279a86e8074fa6a9996bf070018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oscillate: 0
+  movementVector: {x: 5, y: 0, z: 0}
+  period: 2
 --- !u!1 &8823958872303517956
 GameObject:
   m_ObjectHideFlags: 0

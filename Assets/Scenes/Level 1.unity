@@ -3400,6 +3400,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9051167454541138313, guid: b71960a6faa97a1498eb0f4435a65c75, type: 3}
+      propertyPath: oscillate
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6505,7 +6509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7027854078247882453, guid: 4f23b58ef31c00d48b7490c3f1fae927, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -2.54
       objectReference: {fileID: 0}
     - target: {fileID: 7027854078247882453, guid: 4f23b58ef31c00d48b7490c3f1fae927, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6542,6 +6546,10 @@ PrefabInstance:
     - target: {fileID: 7027854078247882453, guid: 4f23b58ef31c00d48b7490c3f1fae927, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585054327060732905, guid: 4f23b58ef31c00d48b7490c3f1fae927, type: 3}
+      propertyPath: oscillate
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6634,6 +6642,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 398221456}
     m_Modifications:
+    - target: {fileID: -1186645216369484585, guid: 393704c582d2faa448e7e96fba39bef3, type: 3}
+      propertyPath: oscillate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2274195512289187515, guid: 393704c582d2faa448e7e96fba39bef3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.41
@@ -9289,13 +9301,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 398221456}
     m_Modifications:
+    - target: {fileID: -8469865301861481166, guid: 4cc1afb18401b094d8948da6093870a7, type: 3}
+      propertyPath: oscillate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1074886847034352617, guid: 4cc1afb18401b094d8948da6093870a7, type: 3}
       propertyPath: m_Name
       value: -RangeObsticle
       objectReference: {fileID: 0}
     - target: {fileID: 6559144749103943940, guid: 4cc1afb18401b094d8948da6093870a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.41
+      value: -2.59
       objectReference: {fileID: 0}
     - target: {fileID: 6559144749103943940, guid: 4cc1afb18401b094d8948da6093870a7, type: 3}
       propertyPath: m_LocalPosition.y

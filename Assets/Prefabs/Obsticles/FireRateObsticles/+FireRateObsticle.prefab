@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 6879885325169495964}
   - component: {fileID: 2703703438302458165}
   - component: {fileID: 4800737827531682277}
+  - component: {fileID: 9051167454541138313}
   m_Layer: 0
   m_Name: +FireRateObsticle
   m_TagString: Untagged
@@ -263,6 +264,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9051167454541138313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3720800089133273411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89561279a86e8074fa6a9996bf070018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oscillate: 0
+  movementVector: {x: 5, y: 0, z: 0}
+  period: 2
 --- !u!1 &4216265024682756881
 GameObject:
   m_ObjectHideFlags: 0

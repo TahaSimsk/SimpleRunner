@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using RDG;
 
 public class FireRateObsticle : MonoBehaviour
 {
@@ -33,10 +34,11 @@ public class FireRateObsticle : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        animator.SetTrigger("BulletHit");
+        
         if (other.gameObject.CompareTag("Bullet"))
         {
-
+            animator.SetTrigger("BulletHit");
+            Vibration.Vibrate(10, 50);
             if (increaseFireRate)
             {
                 fireRate += fireRateMultiplier;

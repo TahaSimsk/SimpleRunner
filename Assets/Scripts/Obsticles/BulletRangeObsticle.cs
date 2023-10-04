@@ -1,3 +1,4 @@
+using RDG;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -22,6 +23,7 @@ public class BulletRangeObsticle : MonoBehaviour
     {
 
         baseRangeText.text = bulletRange.ToString();
+        Vibration.Vibrate(10, 50);
 
         if (increaseRange)
         {

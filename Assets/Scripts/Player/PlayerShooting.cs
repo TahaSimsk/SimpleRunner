@@ -1,3 +1,4 @@
+using RDG;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -33,6 +34,7 @@ public class PlayerShooting : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(fireRate);
+            Vibration.Vibrate(1, 50);
             FireBullets();
         }
     }

@@ -1,3 +1,4 @@
+using RDG;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -27,6 +28,7 @@ public class Girls : MonoBehaviour
 
             maxHealth--;
             healthText.text = maxHealth.ToString();
+            Vibration.Vibrate(10, 50);
             if (maxHealth <= 0 && !hasDropped)
             {
                 hasDropped = true;
@@ -40,6 +42,7 @@ public class Girls : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             LevelManager.Instance.TriggerEndOfLevel();
+            
         }
     }
 }

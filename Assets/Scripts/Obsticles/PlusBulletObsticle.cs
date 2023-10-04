@@ -1,3 +1,4 @@
+using RDG;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,6 +17,7 @@ public class PlusBulletObsticle : MonoBehaviour
     {
         if (other.CompareTag("Bullet"))
         {
+            Vibration.Vibrate(10, 50);
             animator.SetTrigger("BulletHit");
             bulletsHit++;
             if (bulletsHit / bulletsHitDivider >= 1)

@@ -1,3 +1,4 @@
+using RDG;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -87,6 +88,7 @@ public class Shop : MonoBehaviour
 
             MoneyManager.Instance.UpdateEndLevelMoneyText();
             UpdateFireRateUpgradeCostAndLvlText();
+            Vibration.Vibrate(50, 50);
         }
     }
 
@@ -101,6 +103,7 @@ public class Shop : MonoBehaviour
 
             MoneyManager.Instance.UpdateEndLevelMoneyText();
             UpdateRangeUpgradeCostAndLvlText();
+            Vibration.Vibrate(50, 50);
         }
     }
 
@@ -116,6 +119,7 @@ public class Shop : MonoBehaviour
 
             MoneyManager.Instance.UpdateEndLevelMoneyText();
             UpdateIncomeUpgradeCostAndLvlText();
+            Vibration.Vibrate(50, 50);
         }
 
     }
