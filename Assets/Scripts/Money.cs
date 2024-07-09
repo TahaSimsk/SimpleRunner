@@ -6,28 +6,31 @@ using UnityEngine.SceneManagement;
 
 public class Money : MonoBehaviour
 {
-    [SerializeField] float moneyMultiplier;
-    [SerializeField] float moneyAmount;
+    [SerializeField] float baseMoneyMultiplier;
     [SerializeField] TextMeshProUGUI moneyText;
 
-
-    public const string MoneyAmountKey = "MoneyAmountKey";
+    bool hasCollected=false;
 
     void Start()
     {
-        moneyAmount = PlayerPrefs.GetFloat(MoneyAmountKey, 100);
-        moneyText.text ="$" + moneyAmount.ToString();
+        MoneyManager.Instance.UpdateInGameMoneyText();
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Money"))
         {
+            if (hasCollected)
+            {
+                return;
+            }
+            MoneyManager.Instance.totalMoney += (baseMoneyMultiplier + SceneManager.GetActiveScene().buildIndex * 2) * Powers.Instance.moneyIncomeMultiplier;
 
-            moneyAmount += moneyMultiplier * (SceneManager.GetActiveScene().buildIndex + 1);
-            PlayerPrefs.SetFloat(MoneyAmountKey, moneyAmount);
-            moneyText.text ="$" + moneyAmount.ToString();
+            MoneyManager.Instance.UpdateInGameMoneyText();
+
             Destroy(other.gameObject);
+            
         }
 
     }
