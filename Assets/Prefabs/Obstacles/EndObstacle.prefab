@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2336379783969792526}
   - component: {fileID: 6034420708340922334}
   m_Layer: 0
-  m_Name: Girl
+  m_Name: EndObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

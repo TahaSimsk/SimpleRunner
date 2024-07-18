@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4675828664261165798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5951518047263660077}
+  - component: {fileID: 8560547594545903587}
+  m_Layer: 0
+  m_Name: Shop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5951518047263660077
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4675828664261165798}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8560547594545903587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4675828664261165798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4fca2ad201bb74895fe0f7b8a863c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fRUpgradeCostButtonText: {fileID: 0}
+  fRButtonLevelText: {fileID: 0}
+  rangeUpgradeCostButtonText: {fileID: 0}
+  rangeButtonLevelText: {fileID: 0}
+  incomeUpgradeCostButtonText: {fileID: 0}
+  incomeButtonLevelText: {fileID: 0}
+  fireRateUpgradeCost: 0
+  fireRateUpgradeCostMultiplier: 0
+  fireRateUpgradeAmount: 0
+  fireRateLvl: 0
+  bulletRangeUpgradeCost: 0
+  bulletRangeUpgradeCostMultiplier: 0
+  bulletRangeUpgradeAmount: 0
+  rangeLvl: 0
+  moneyIncomeUpgradeCost: 0
+  moneyIncomeUpgradeCostMultiplier: 0
+  moneyIncomeUpgradeAmount: 0
+  incomeLvl: 0
+  gameData:
+    totalMoney: 10000
+    levelBuildIndex: 0
+    fireRate: 0.5
+    bulletRange: 1
+    moneyIncomeMultiplier: 1
+    fireRateUpgradeCost: 50
+    fireRateUpgradeCostMultiplier: 1.5
+    fireRateUpgradeAmount: -0.01
+    fireRatelvl: 1
+    bulletRangeUpgradeCost: 50
+    bulletRangeUpgradeCostMultiplier: 1.5
+    bulletRangeUpgradeAmount: 0.05
+    rangeLvl: 1
+    moneyIncomeUpgradeCost: 50
+    moneyIncomeUpgradeCostMultiplier: 1.5
+    moneyIncomeUpgradeAmount: 1.05
+    incomeLvl: 1

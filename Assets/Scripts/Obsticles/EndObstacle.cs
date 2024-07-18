@@ -1,10 +1,7 @@
-using RDG;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Girls : MonoBehaviour
+public class EndObstacle : MonoBehaviour
 {
     [SerializeField] float maxHealth;
     [SerializeField] GameObject moneyPrefab;
@@ -28,14 +25,13 @@ public class Girls : MonoBehaviour
 
             maxHealth--;
             healthText.text = maxHealth.ToString();
-            Vibration.Vibrate(10, 50);
             if (maxHealth <= 0 && !hasDropped)
             {
                 hasDropped = true;
-                Destroy(gameObject);
                 Vector3 pos = transform.position;
                 pos.y = 0.2f;
                 Instantiate(moneyPrefab, pos, Quaternion.identity);
+                Destroy(gameObject);
             }
         }
 

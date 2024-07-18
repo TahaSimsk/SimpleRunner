@@ -4,11 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Obsticle
   - Bullet
   - Money
   - Wallet
   - Instance
+  - Obstacle
   layers:
   - Default
   - TransparentFX

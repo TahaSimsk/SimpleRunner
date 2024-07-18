@@ -1,31 +1,42 @@
 using RDG;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] GameObject bullet;
     [SerializeField] Transform bulletSpawnPoint;
-
     [SerializeField] Animator animator;
 
-    [SerializeField] float fireRate;
     [SerializeField] float bulletForwardSpeed;
-    [SerializeField] float bulletRange;
-
-
     [SerializeField] float bulletCount;
 
+    PlayerShooting originalPlayer;
+
+    bool IsClone;
+
     float bulletRotation;
+    float fireRate;
+    float bulletRange;
+
 
     private void Start()
     {
-        fireRate = Powers.Instance.fireRate;
-        bulletRange = Powers.Instance.bulletRange;
+        if (!IsClone)
+        {
+            fireRate = SaveManager.Instance.gameData.fireRate;
+            bulletRange = SaveManager.Instance.gameData.bulletRange;
+            originalPlayer = this;
+        }
+
 
         StartCoroutine(Shoot());
+    }
+
+    public void SetOriginalPlayer(PlayerShooting _originalPlayer)
+    {
+        IsClone = true;
+        originalPlayer = _originalPlayer;
     }
 
 
@@ -33,7 +44,7 @@ public class PlayerShooting : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(fireRate);
+            yield return new WaitForSeconds(originalPlayer.fireRate);
             Vibration.Vibrate(1, 50);
             FireBullets();
         }
@@ -41,24 +52,24 @@ public class PlayerShooting : MonoBehaviour
 
 
 
-    public void GetFireRate(float passFireRate)
+    public void SetFireRate(float _amount)
     {
 
-        fireRate -= passFireRate / 1000;
+        originalPlayer.fireRate -= _amount / 1000;
 
-        fireRate = Mathf.Clamp(fireRate, 0.1f, 2);
+        originalPlayer.fireRate = Mathf.Clamp(originalPlayer.fireRate, 0.1f, 2);
     }
 
-    public void GetRange(float passRange)
+    public void SetRange(float _amount)
     {
-        bulletRange += passRange / 100;
+        originalPlayer.bulletRange += _amount / 100;
 
-        bulletRange = Mathf.Clamp(bulletRange, 0.2f, 2);
+        originalPlayer.bulletRange = Mathf.Clamp(originalPlayer.bulletRange, 0.2f, 2);
     }
 
-    public void GetBulletCount(float passBulletCount)
+    public void SetBulletCount(float _amount)
     {
-        bulletCount += passBulletCount;
+        bulletCount += _amount;
     }
 
 
@@ -79,12 +90,11 @@ public class PlayerShooting : MonoBehaviour
                 bulletRotation = -bulletRotation + 1.5f;
             }
 
-
             GameObject bulletInstance = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.Euler(0, bulletRotation, 0));
-            
+
             bulletInstance.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * bulletForwardSpeed);
             bulletInstance.transform.rotation = Quaternion.Euler(0, 90, 0);
-            Destroy(bulletInstance, bulletRange);
+            Destroy(bulletInstance, originalPlayer.bulletRange);
 
             animator.SetTrigger("Fire");
         }

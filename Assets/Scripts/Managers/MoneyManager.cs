@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -9,9 +7,7 @@ public class MoneyManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI endLevelMoneyText;
 
     public static MoneyManager Instance;
-    public GameData gameData;
 
-    public float totalMoney;
 
     private void Awake()
     {
@@ -24,21 +20,51 @@ public class MoneyManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+    }
 
-        gameData = SaveSystem.Load();
-
-        totalMoney = gameData.totalMoney;
-
+    private void Start()
+    {
+        UpdateInGameMoneyText();
+        UpdateEndLevelMoneyText();
     }
 
 
-    public void UpdateInGameMoneyText()
+    public bool IsAffordable(float amount)
     {
-        inGameMoneyText.text = "$" + Mathf.FloorToInt(totalMoney);
+        if (SaveManager.Instance.gameData.totalMoney >= amount)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void DecreaseMoney(float amount)
+    {
+        SaveManager.Instance.gameData.totalMoney -= amount;
+        UpdateInGameMoneyText();
+        UpdateEndLevelMoneyText();
+    }
+
+    public void AddMoney(float amount)
+    {
+        SaveManager.Instance.gameData.totalMoney += amount;
+        UpdateInGameMoneyText();
+        UpdateEndLevelMoneyText();
+    }
+
+
+
+
+    void UpdateInGameMoneyText()
+    {
+        inGameMoneyText.text = "$" + Mathf.FloorToInt(SaveManager.Instance.gameData.totalMoney);
     }
 
     public void UpdateEndLevelMoneyText()
     {
-        endLevelMoneyText.text = "$" + Mathf.FloorToInt(totalMoney);
+        endLevelMoneyText.text = "$" + Mathf.FloorToInt(SaveManager.Instance.gameData.totalMoney);
     }
 }

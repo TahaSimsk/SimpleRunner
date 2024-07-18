@@ -1,17 +1,10 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class CollectionArea : MonoBehaviour
 {
     [SerializeField] List<Transform> transforms;
     [SerializeField] List<Transform> walletSpawnPoints;
-    [SerializeField] Transform walletSpawnPoint;
-    [SerializeField] GameObject go;
     List<GameObject> gameObjects;
     List<GameObject> wallets;
     List<GameObject> instances;
@@ -75,19 +68,19 @@ public class CollectionArea : MonoBehaviour
 
             GameObject instance = Instantiate(other.gameObject, new Vector3(walletSpawnPoints[i].position.x, other.gameObject.transform.position.y, walletSpawnPoints[i].position.z), Quaternion.identity);
 
+
             instances.Add(instance);
 
-            instances[i].SetActive(true);
+            instance.SetActive(true);
 
-            instances[i].GetComponent<PlayerShooting>().enabled = true;
-            instances[i].GetComponent<Money>().enabled = false;
-            instances[i].GetComponent<PlayerMovement>().enabled = false;
-            instances[i].GetComponent<BoxCollider>().size = new Vector3(0.5f, 1, 0.7f);
-            instances[i].GetComponent<BoxCollider>().center = Vector3.zero;
+            instance.GetComponent<PlayerShooting>().enabled = true;
+            instance.GetComponent<PlayerShooting>().SetOriginalPlayer(other.GetComponent<PlayerShooting>());
+            instance.GetComponent<MoneyCollector>().enabled = false;
+            instance.GetComponent<PlayerMovement>().enabled = false;
+            instance.GetComponent<BoxCollider>().enabled = false;
+            Destroy(instance.GetComponent<Rigidbody>());
 
-            Destroy(instances[i].GetComponent<Rigidbody>());
-
-            instances[i].tag = "Instance";
+            instance.tag = "Instance";
 
         }
 

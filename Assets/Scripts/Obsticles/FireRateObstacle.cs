@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using RDG;
 
-public class FireRateObsticle : MonoBehaviour
+public class FireRateObstacle : MonoBehaviour
 {
     [SerializeField] bool increaseFireRate;
     [SerializeField] bool decreaseFireRate;
@@ -38,7 +35,6 @@ public class FireRateObsticle : MonoBehaviour
         if (other.gameObject.CompareTag("Bullet"))
         {
             animator.SetTrigger("BulletHit");
-            Vibration.Vibrate(10, 50);
             if (increaseFireRate)
             {
                 fireRate += fireRateMultiplier;
@@ -55,7 +51,7 @@ public class FireRateObsticle : MonoBehaviour
         PlayerShooting playerShooting = other.GetComponent<PlayerShooting>();
         if (playerShooting != null)
         {
-            playerShooting.GetFireRate(fireRate);
+            playerShooting.SetFireRate(fireRate);
 
             visuals.SetActive(false);
         }

@@ -1,9 +1,6 @@
 using RDG;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Shop : MonoBehaviour
 {
@@ -18,31 +15,7 @@ public class Shop : MonoBehaviour
 
 
 
-
-    [Header("FireRate")]
-    public float fireRateUpgradeCost;
-    public float fireRateUpgradeCostMultiplier;
-    public float fireRateUpgradeAmount;
-    public float fireRateLvl;
-
-    [Header("Range")]
-    public float bulletRangeUpgradeCost;
-    public float bulletRangeUpgradeCostMultiplier;
-    public float bulletRangeUpgradeAmount;
-    public float rangeLvl;
-
-    [Header("MoneyIncome")]
-    public float moneyIncomeUpgradeCost;
-    public float moneyIncomeUpgradeCostMultiplier;
-    public float moneyIncomeUpgradeAmount;
-    public float incomeLvl;
-
-
-
-
-
     public static Shop Instance;
-    public GameData gameData;
 
     private void Awake()
     {
@@ -57,36 +30,19 @@ public class Shop : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        gameData = SaveSystem.Load();
-        fireRateUpgradeCost = gameData.fireRateUpgradeCost;
-        fireRateUpgradeCostMultiplier = gameData.fireRateUpgradeCostMultiplier;
-        fireRateUpgradeAmount = gameData.fireRateUpgradeAmount;
-        fireRateLvl = gameData.fireRatelvl;
-
-        bulletRangeUpgradeCost = gameData.bulletRangeUpgradeCost;
-        bulletRangeUpgradeCostMultiplier = gameData.bulletRangeUpgradeCostMultiplier;
-        bulletRangeUpgradeAmount = gameData.bulletRangeUpgradeAmount;
-        rangeLvl = gameData.rangeLvl;
-
-        moneyIncomeUpgradeCost = gameData.moneyIncomeUpgradeCost;
-        moneyIncomeUpgradeCostMultiplier = gameData.moneyIncomeUpgradeCostMultiplier;
-        moneyIncomeUpgradeAmount = gameData.moneyIncomeUpgradeAmount;
-        incomeLvl = gameData.incomeLvl;
-
-
     }
 
 
     public void FireRateButton()
     {
-        if (MoneyManager.Instance.totalMoney >= fireRateUpgradeCost)
+        if (MoneyManager.Instance.IsAffordable(SaveManager.Instance.gameData.fireRateUpgradeCost))
         {
-            MoneyManager.Instance.totalMoney -= fireRateUpgradeCost;
-            fireRateUpgradeCost *= fireRateUpgradeCostMultiplier;
-            Powers.Instance.fireRate += fireRateUpgradeAmount;
-            fireRateLvl++;
+            MoneyManager.Instance.DecreaseMoney(SaveManager.Instance.gameData.fireRateUpgradeCost);
 
-            MoneyManager.Instance.UpdateEndLevelMoneyText();
+            SaveManager.Instance.gameData.fireRateUpgradeCost *= SaveManager.Instance.gameData.fireRateUpgradeCostMultiplier;
+            SaveManager.Instance.gameData.fireRate += SaveManager.Instance.gameData.fireRateUpgradeAmount;
+            SaveManager.Instance.gameData.fireRatelvl++;
+
             UpdateFireRateUpgradeCostAndLvlText();
             Vibration.Vibrate(50, 50);
         }
@@ -94,14 +50,14 @@ public class Shop : MonoBehaviour
 
     public void BulletRangeButton()
     {
-        if (MoneyManager.Instance.totalMoney >= bulletRangeUpgradeCost)
+        if (MoneyManager.Instance.IsAffordable(SaveManager.Instance.gameData.bulletRangeUpgradeCost))
         {
-            MoneyManager.Instance.totalMoney -= bulletRangeUpgradeCost;
-            bulletRangeUpgradeCost *= bulletRangeUpgradeCostMultiplier;
-            Powers.Instance.bulletRange += bulletRangeUpgradeAmount;
-            rangeLvl++;
+            MoneyManager.Instance.DecreaseMoney(SaveManager.Instance.gameData.bulletRangeUpgradeCost);
 
-            MoneyManager.Instance.UpdateEndLevelMoneyText();
+            SaveManager.Instance.gameData.bulletRangeUpgradeCost *= SaveManager.Instance.gameData.bulletRangeUpgradeCostMultiplier;
+            SaveManager.Instance.gameData.bulletRange += SaveManager.Instance.gameData.bulletRangeUpgradeAmount;
+            SaveManager.Instance.gameData.rangeLvl++;
+
             UpdateRangeUpgradeCostAndLvlText();
             Vibration.Vibrate(50, 50);
         }
@@ -110,14 +66,14 @@ public class Shop : MonoBehaviour
 
     public void MoneyIncomeButton()
     {
-        if (MoneyManager.Instance.totalMoney >= moneyIncomeUpgradeCost)
+        if (MoneyManager.Instance.IsAffordable(SaveManager.Instance.gameData.moneyIncomeUpgradeCost))
         {
-            MoneyManager.Instance.totalMoney -= moneyIncomeUpgradeCost;
-            moneyIncomeUpgradeCost *= moneyIncomeUpgradeCostMultiplier;
-            Powers.Instance.moneyIncomeMultiplier += moneyIncomeUpgradeAmount;
-            incomeLvl++;
+            MoneyManager.Instance.DecreaseMoney(SaveManager.Instance.gameData.moneyIncomeUpgradeCost);
 
-            MoneyManager.Instance.UpdateEndLevelMoneyText();
+            SaveManager.Instance.gameData.moneyIncomeUpgradeCost *= SaveManager.Instance.gameData.moneyIncomeUpgradeCostMultiplier;
+            SaveManager.Instance.gameData.moneyIncomeMultiplier += SaveManager.Instance.gameData.moneyIncomeUpgradeAmount;
+            SaveManager.Instance.gameData.incomeLvl++;
+
             UpdateIncomeUpgradeCostAndLvlText();
             Vibration.Vibrate(50, 50);
         }
@@ -129,19 +85,19 @@ public class Shop : MonoBehaviour
 
     public void UpdateFireRateUpgradeCostAndLvlText()
     {
-        fRUpgradeCostButtonText.text = "$" + Mathf.FloorToInt(fireRateUpgradeCost);
-        fRButtonLevelText.text = "Level " + fireRateLvl;
+        fRUpgradeCostButtonText.text = "$" + Mathf.FloorToInt(SaveManager.Instance.gameData.fireRateUpgradeCost);
+        fRButtonLevelText.text = "Level " + SaveManager.Instance.gameData.fireRatelvl;
     }
 
     public void UpdateRangeUpgradeCostAndLvlText()
     {
-        rangeUpgradeCostButtonText.text = "$" + Mathf.FloorToInt(bulletRangeUpgradeCost);
-        rangeButtonLevelText.text = "Level " + rangeLvl;
+        rangeUpgradeCostButtonText.text = "$" + Mathf.FloorToInt(SaveManager.Instance.gameData.bulletRangeUpgradeCost);
+        rangeButtonLevelText.text = "Level " + SaveManager.Instance.gameData.rangeLvl;
     }
 
     public void UpdateIncomeUpgradeCostAndLvlText()
     {
-        incomeUpgradeCostButtonText.text = "$" + Mathf.FloorToInt(moneyIncomeUpgradeCost);
-        incomeButtonLevelText.text = "Level " + incomeLvl;
+        incomeUpgradeCostButtonText.text = "$" + Mathf.FloorToInt(SaveManager.Instance.gameData.moneyIncomeUpgradeCost);
+        incomeButtonLevelText.text = "Level " + SaveManager.Instance.gameData.incomeLvl;
     }
 }

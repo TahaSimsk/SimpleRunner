@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class BulletRangeObsticle : MonoBehaviour
+public class BulletRangeObstacle : MonoBehaviour
 {
     [SerializeField] bool increaseRange;
     [SerializeField] bool decreaseRange;
@@ -23,7 +23,6 @@ public class BulletRangeObsticle : MonoBehaviour
     {
 
         baseRangeText.text = bulletRange.ToString();
-        Vibration.Vibrate(10, 50);
 
         if (increaseRange)
         {
@@ -54,12 +53,12 @@ public class BulletRangeObsticle : MonoBehaviour
             baseRangeText.text = bulletRange.ToString();
         }
 
-        PlayerShooting playerShooting= other.GetComponent<PlayerShooting>();
+        PlayerShooting playerShooting = other.GetComponent<PlayerShooting>();
 
         if (playerShooting != null)
         {
-            playerShooting.GetRange(bulletRange);
-            
+            playerShooting.SetRange(bulletRange);
+
             visuals.SetActive(false);
         }
 

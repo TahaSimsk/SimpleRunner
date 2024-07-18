@@ -1,30 +1,22 @@
 using RDG;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] GameObject inGameUI;
     [SerializeField] GameObject endOfLevelUI;
-
+    [SerializeField] GameObject mainMenuUI;
 
     public static LevelManager Instance;
-    public GameData gameData;
 
 
-    public bool isDead = false;
+    [HideInInspector] public bool isDead = false;
 
 
     private void Awake()
     {
-
-        gameData = SaveSystem.Load();
-
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -34,12 +26,14 @@ public class LevelManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        Application.targetFrameRate = 120;
     }
 
     private void Start()
     {
-        //load the level that is currently saved index
-        SceneManager.LoadScene(gameData.levelBuildIndex);
+        SceneManager.LoadScene(0);
+        mainMenuUI.SetActive(true);
     }
 
 
@@ -61,21 +55,41 @@ public class LevelManager : MonoBehaviour
 
     public void NextLevelButton()
     {
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        {
+            nextSceneIndex = 1;
+        }
 
         Time.timeScale = 1;
         inGameUI.SetActive(true);
         endOfLevelUI.SetActive(false);
         isDead = false;
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SaveManager.Instance.gameData.levelBuildIndex = nextSceneIndex;
+        SceneManager.LoadScene(nextSceneIndex);
+
         Vibration.Vibrate(50, 50);
     }
-
-
 
     public void DeleteSave()
     {
         File.Delete(Application.persistentDataPath + "/data.qnd");
+    }
+
+    public void StartGameButton()
+    {
+
+        mainMenuUI.SetActive(false);
+        inGameUI.SetActive(true);
+        if (SaveManager.Instance.gameData.levelBuildIndex > 0)
+        {
+            SceneManager.LoadScene(SaveManager.Instance.gameData.levelBuildIndex);
+        }
+        else
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 
 

@@ -1,10 +1,8 @@
 using RDG;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class PlusBulletObsticle : MonoBehaviour
+public class PlusBulletObstacle : MonoBehaviour
 {
     [SerializeField] float bulletsHitDivider;
     [SerializeField] TMP_Text bulletCountText;
@@ -17,7 +15,6 @@ public class PlusBulletObsticle : MonoBehaviour
     {
         if (other.CompareTag("Bullet"))
         {
-            Vibration.Vibrate(10, 50);
             animator.SetTrigger("BulletHit");
             bulletsHit++;
             if (bulletsHit / bulletsHitDivider >= 1)
@@ -33,7 +30,7 @@ public class PlusBulletObsticle : MonoBehaviour
         PlayerShooting playerShooting = other.gameObject.GetComponent<PlayerShooting>();
         if (playerShooting != null)
         {
-            playerShooting.GetBulletCount(bulletCount);
+            playerShooting.SetBulletCount(bulletCount);
             Destroy(gameObject);
         }
 

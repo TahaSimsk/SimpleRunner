@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TouchPhase = UnityEngine.TouchPhase;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,9 +9,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float stopBounceTimer;
 
     [SerializeField] float roadLenght;
-
-    public bool isClone;
-    public float cloneAmount;
 
     bool shouldBounce = false;
     float horizontalValue;
@@ -26,11 +22,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (isClone)
-        {
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -roadLenght, roadLenght), transform.position.y, transform.position.z);
-            return;
-        }
         MoveForward();
         MoveHorizontal();
 
@@ -43,32 +34,31 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.Translate(new Vector3(0, 0, forwardMoveSpeed * Time.deltaTime));
         }
+        else
+        {
+            transform.Translate(new Vector3(0, 0, -forwardMoveSpeed * Time.deltaTime));
+        }
     }
 
     void MoveHorizontal()
     {
 
-        //float newPositionX = transform.position.x + touchInputs.horizontalValue / 7f;
-        //transform.position = new Vector3(newPositionX, transform.position.y, transform.position.z);
-
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && !LevelManager.Instance.isDead)
         {
             horizontalValue = Input.GetTouch(0).deltaPosition.x / Screen.width * horizontalMoveSpeed;
             float newPositionX = transform.position.x + horizontalValue;
-            newPositionX = Mathf.Clamp(newPositionX, -roadLenght + cloneAmount, roadLenght - cloneAmount);
+            newPositionX = Mathf.Clamp(newPositionX, -roadLenght, roadLenght);
             transform.position = new Vector3(newPositionX, transform.position.y, transform.position.z);
-            //rb.AddForce(new Vector3(horizontalValue, 0, 0), ForceMode.Impulse);
         }
 
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Obsticle"))
+        if (collision.gameObject.CompareTag("Obstacle"))
         {
-            rb.AddForce(Vector3.back * bounceForce);
             shouldBounce = true;
-            Invoke("StopBouncing", stopBounceTimer);
+            Invoke(nameof(StopBouncing), stopBounceTimer);
         }
     }
 
@@ -76,6 +66,4 @@ public class PlayerMovement : MonoBehaviour
     {
         shouldBounce = false;
     }
-
-
 }

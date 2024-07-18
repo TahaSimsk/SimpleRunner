@@ -1,6 +1,3 @@
-using RDG;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -24,7 +21,6 @@ public class WalletObstacle : MonoBehaviour
         if (other.CompareTag("Bullet"))
         {
             animator.SetTrigger("BulletHit");
-            Vibration.Vibrate(10, 1);
             maxHealth--;
             healthText.text = maxHealth.ToString();
             if (maxHealth <= 0 && !hasDied)
